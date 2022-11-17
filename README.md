@@ -4,13 +4,18 @@
 
 - Avoir installé un IDE :
   - IntelliJ Ultimate, avec votre adresse IPI sur Jetbrains Student à https://www.jetbrains.com/student/
-  - ou Eclipse, à https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-java-developers
-- Savoir utiliser Git et les branches. Quelques liens :
+  - sinon Eclipse, à https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-java-developers
+- Savoir utiliser Git et les branches (utilisez les capacités Git de votre IDE ou installez-le séparément depuis
+https://git-scm.com/download/win ). Quelques liens :
   - https://learngitbranching.js.org/
   - https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
 - Avoir un compte Github. Voici comment y configurer l'authentification de git par clé SSH :
   - https://docs.github.com/en/authentication/connecting-to-github-with-ssh
   - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+- Connaître les bases du développement Java avec Maven (la persistence avec JPA est également utilisée ponctuellement),
+et au moins comment importer et compiler un projet Java dans l'IDE :
+  - IntelliJ : voir IV-B-2 à https://damienrieu.developpez.com/tutoriel/java/nouveautes-intellij-12/?page=page_1
+  - sinon Eclipse : voir https://thierry-leriche-dessirier.developpez.com/tutoriels/java/importer-projet-maven-dans-eclipse-5-min/
 
 
 ## TD
@@ -46,9 +51,16 @@ Dans tous les cas :
 - vous pouvez corriger le code de la méthode testée si nécessaire
 
 Questions :
-- Tests unitaires simples : Testez unitairement la méthode `SalarieAideADomicile.aDroitADesCongesPayes()` (pensez aux cas aux limites).
+- Tests unitaires simples : Testez unitairement la méthode `SalarieAideADomicile.aDroitADesCongesPayes()`.
+Pensez aux cas aux limites (quand on fait évoluer les valeurs en entrée, le moment où elles font changer le résultat).
+Sa javadoc contient une copie de ses spécifications métier (ce à quoi elle est sensée
+servir), tirée de https://femme-de-menage.ooreka.fr/comprendre/conges-payes-femme-de-menage .
 - Tests paramétrés : Testez par une méthode de test paramétrée la méthode `SalarieAideADomicile.calculeJoursDeCongeDecomptesPourPlage()`.
+Aide : pour lire une date depuis du texte, utiliser LocalDate.parse(<date au format ISO8601 ex. 2022-11-01>).
+Pour information, cette méthode suit les spécifications métier exprimées à https://femme-de-menage.ooreka.fr/comprendre/conges-payes-femme-de-menage
+et notamment clarifiées dans les Exemples 1 et 2 visibles en cliquant sur "Congés payés femme de ménage : décompte des jours".
 - Tests avec mocks : Testez de manière mockée (sans dépendance à la base de données) la méthode `SalarieAideADomicileService.clotureMois()`.
+Elle fait plusieurs choses et il y a donc plusieurs choses à tester.
 
 ### Tests d'intégration
 
