@@ -14,7 +14,7 @@ https://git-scm.com/download/win ). Quelques liens :
   - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
 - Connaître les bases du développement Java avec Maven (la persistence avec JPA est également utilisée ponctuellement),
 et au moins comment importer et compiler un projet Java dans l'IDE :
-  - IntelliJ : voir IV-B-2 à https://damienrieu.developpez.com/tutoriel/java/nouveautes-intellij-12/?page=page_1
+  - IntelliJ : clic droit sur pom.xml > Add as Maven project ou bien voir IV-B-2 à https://damienrieu.developpez.com/tutoriel/java/nouveautes-intellij-12/?page=page_1
   - sinon Eclipse : voir https://thierry-leriche-dessirier.developpez.com/tutoriels/java/importer-projet-maven-dans-eclipse-5-min/
 
 
@@ -64,8 +64,11 @@ Elle fait plusieurs choses et il y a donc plusieurs choses à tester.
 
 ### Tests d'intégration
 
-- Tests de repository : Testez la méthode `SalarieAideADomicileRepository.findByNom()`.
-- Tests d'intégration de service : Créez un test d'intégration d'un exemple d'usage typique de la méthode `SalarieAideADomicileService.clotureMois()`.
+- Tests de repository : Testez la méthode `SalarieAideADomicileRepository.findByNom()`. Aide : pour qu'il y ait des
+  données dans la base, utilisez la méthode `save()` du repository.
+- Tests d'intégration de service : Créez un test d'intégration d'un exemple d'usage typique de la méthode `SalarieAideADomicileService.clotureMois()`. Aide : une aide supplémentaire à la création des objets en base est
+  fournie par la méthode `SalarieAideADomicileService.creerSalarieAideADomicile()`. Mais attention, elle fait des
+  vérifications qui peuvent nécessiter la réinitialisation de la base dans les tests (en méthode annotée @BeforeEach) !
 
 ### Tests d'acceptation
 
@@ -93,6 +96,8 @@ d'acceptation validant la fonctionnalité de clôture de mois d'un salarié aide
 
 Une fois le TD fini, réalisez les travaux de l'évaluation dans une branche "evaluation" créée à partir de la branche "master" de votre repository forké.
 
+Si validé en séance, l'évaluation doit être effectuée "pair programming" et donc en binôme, entre étudiants de niveaux différents, en se "passant le clavier" entre chaque question mais en utilisant quand même chacun successivement son propre compte github.
+  
 Dans tous les cas :
 - assurez-vous que le build passe (compilation, tests) et qu'il n'y a aucune alerte Sonar bloquante, critique ou majeur (Code Smells, anomalies, bugs). Vous pouvez corriger le code originel si nécessaire.
 - efforcez-vous d'avoir une couverture de code à 100% sur les méthodes testées plus bas. BONUS : même chose mais avec la couverture de code avec mutation.
@@ -119,7 +124,7 @@ corrections demandées.
 
 - Tests de repository : Testez la méthode `SalarieAideADomicileRepository.partCongesPrisTotauxAnneeNMoins1()`
 - Tests d'intégration de service : Créez un test d'intégration d'un exemple d'usage typique de la méthode `SalarieAideADomicileService.calculeLimiteEntrepriseCongesPermis()`
-- TODO RM BONUS Ecrire un test d'acceptation Cucumber pour au moins la partie "ancienneté" la fonctionnalité de calcul
+- BONUS Ecrire un test d'acceptation Cucumber pour au moins la partie "ancienneté" la fonctionnalité de calcul
   de limite de congés permis par l'entreprise.
 
 ### Maintenabilité
