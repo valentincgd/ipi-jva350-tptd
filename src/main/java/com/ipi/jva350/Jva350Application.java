@@ -9,6 +9,7 @@ public class Jva350Application {
     public static void main(String[] args) {
 
         SpringApplication.run(Jva350Application.class, args);
+
     }
 
 }
