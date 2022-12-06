@@ -24,7 +24,7 @@ public class EntrepriseTest {
 
     @ParameterizedTest()
     @CsvSource({
-            "'2022-12-25', true",
+            "'2022-11-01', true",
             "'2022-01-10', false"
     })
     void testEstJourFerier(String dateTest, Boolean result){
