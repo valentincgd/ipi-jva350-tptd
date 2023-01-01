@@ -1,66 +1,48 @@
 package com.ipi.jva350;
 
-import com.ipi.jva350.model.Entreprise;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.time.LocalDate;
+import com.ipi.jva350.model.Entreprise;
 
 public class EntrepriseTest {
 
-    @Test
-    void testEstDansPlage(){
-
-        Entreprise entreprise = new Entreprise();
-        LocalDate dateTest = LocalDate.parse("2022-12-05");
-        LocalDate dateDebut = LocalDate.parse("2022-12-01");
-        LocalDate dateFin = LocalDate.parse("2022-12-30");
-
-        Assertions.assertTrue(entreprise.estDansPlage(dateTest, dateDebut, dateFin));
-
-    }
-
-    @ParameterizedTest()
+    @ParameterizedTest
     @CsvSource({
             "'2022-11-01', true",
-            "'2022-01-10', false"
+            "'2022-08-15', true",
+            "'2022-05-01', true",
+            "'2022-12-25', true",
+            "'2022-01-01', true",
+            "'2022-02-11', false",
+            "'2022-10-23', false",
+            "'2022-03-27', false",
+            "'2022-09-09', false",
+
     })
-    void testEstJourFerier(String dateTest, Boolean result){
+    void testEstJourFerie(LocalDate jour, Boolean expected) {
 
-        Entreprise entreprise = new Entreprise();
+        Boolean res = Entreprise.estJourFerie(jour);
 
-        Assertions.assertEquals(entreprise.estJourFerie(LocalDate.parse(dateTest)), result);
-
+        Assertions.assertThat(res).isEqualTo(expected);
     }
 
-    @ParameterizedTest()
+    @ParameterizedTest
     @CsvSource({
-            "'2022-03-01', 0.8666666666666666",
-            "'2022-02-01', 0.8"
+            "'2022-11-03', '2022-11-02', '2022-11-04', true",
+            "'2022-11-02', '2022-11-02', '2022-11-04', true",
+            "'2022-11-04', '2022-11-02', '2022-11-04', true",
+            "'2022-11-01', '2022-11-02', '2022-11-04', false",
+            "'2022-11-05', '2022-11-02', '2022-11-04', false",
+
     })
-    void testProportionPondereeDuMois(String dateTest, Double expected){
+    void testEstDansPlage(LocalDate d, LocalDate debutDate, LocalDate finDate, Boolean expected) {
 
-        Entreprise entreprise = new Entreprise();
+        Boolean res = Entreprise.estDansPlage(d, debutDate, finDate);
 
-        Assertions.assertEquals(entreprise.proportionPondereeDuMois(LocalDate.parse(dateTest)), expected);
-
-
-
-    }
-
-    @ParameterizedTest()
-    @CsvSource({
-            "'2022-03-01', '2021-06-01'",
-            "'2033-07-01', '0007-06-01'"
-    })
-    void testGetPremierJourAnneeDeConges(String dateTest, String expected){
-
-        Entreprise entreprise = new Entreprise();
-
-        //System.out.println(entreprise.getPremierJourAnneeDeConges(LocalDate.parse(dateTest)));
-        Assertions.assertEquals(entreprise.getPremierJourAnneeDeConges(LocalDate.parse(dateTest)), LocalDate.parse(expected));
-
+        Assertions.assertThat(res).isEqualTo(expected);
     }
 }
